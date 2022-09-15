@@ -25,7 +25,33 @@
 #       Remember, each function should do just one thing!
 
 ##########################################################################################################################
+import random
 
+def story_line():
+    print("")
+
+def status(health, attack, powers):
+    health = health
+    attack = attack
+    powers = powers
+
+def hero_menu():
+    choice = input(int("What would you like to do?\n 1. Hard Punch\n 2. Kick\n 3. Super Combo\n 4. Heal  "))
+    if choice == 1:
+        print("Hard Punch!")
+    elif choice == 2:
+        print("Kick tornado!")
+    elif choice == 3:
+        print("Super Combo Attack!")
+    elif choice == 4:
+        print("Thanks I feel better!")
+    else:
+        ("Invalid choice. Please choose a number 1-4. ")
+    
+
+
+def random_move(move):
+    enemy_move = random.choice(move)
 
 
 
