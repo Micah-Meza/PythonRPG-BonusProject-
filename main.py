@@ -32,6 +32,8 @@ def run_game():
     welcome()
     quest()
     hero()
+    print("Your quest begans.")
+    print("You apporach the {}.".format(foe))
     story_line()
 
     # status()
@@ -71,6 +73,8 @@ def attack(move):
         print("You used Hercules Grip!")
         damage = random_number(move)
         h_math(damage)
+        print("Your enemies health is now {}!".format(e_health))
+        e_defeated(e_health)
     
     # elif choice == 2:
     #     print("Kick tornado!")Titan Kick
@@ -85,16 +89,21 @@ def attack(move):
         return True
 
 def quest():
+    global choice_1, foe
+    global e_health, e_attack, e_powers
+    
     cont = True
     while cont == True:
         print()
-        print("Which task would you like to do?  \n 1. Slay the vicious Nemean Lion. \n 2. Defeat the impossible nine-headed Lernaean Hydra. \n 3. Capture Cerberus the guard dog of Hades.")
+        print("Which task would you like to do?  \n 1. Slay the vicious Nemean Lion. \n 2. Defeat the impossible nine-headed Lernaean Hydra. \n 3. Capture Cerberus the guard dog of Hades. \n 4. Go Home.")
         print()
-        choice  = int(input("Enter your choice now. "))
-        if choice == 1:
+        choice_1 = int(input("Enter your choice now. "))
+    
+
+        if choice_1 == 1:
             print()
             print("You choose, The Nemean Lion")
-            global e_health, e_attack
+            foe = "The Nemean Lion"
             e_health, e_attack = 500, 100
             e_powers = {"Attack1" : "Bite  ", "Attack2" : "Lion's Might  " , "Attack3" : "Earthquake  ", "Special" : "Iron Jaw" }
             enemy(e_health, e_attack, e_powers)
@@ -118,6 +127,12 @@ def quest():
         #     enemy(health, attack, powers)
 
         #     cont = False
+
+        elif choice_1 == 4:
+            e_defeated(e_health)
+            h_defeated(health)
+            
+
         else:
             print("Invalid choice. Try again. ")
             cont = True
@@ -129,7 +144,7 @@ def enemy(x, y, z):
     e_health, e_attack, e_powers = x, y, z
     print() 
     print("Your enemies stats are:\nHealth: {}\nAttack Strenght: {}".format(e_health, e_attack)) 
-    print("1Attacks Move:\n  1. " + e_powers["Attack1"] + "\n  2. " + e_powers["Attack2"] + "\n  3. " + e_powers["Attack3"] + "\n  4. " + e_powers["Special"])
+    print("Attacks Move:\n  1. " + e_powers["Attack1"] + "\n  2. " + e_powers["Attack2"] + "\n  3. " + e_powers["Attack3"] + "\n  4. " + e_powers["Special"])
     print()
 
 def mylists(choice):
@@ -149,62 +164,133 @@ def hero():
     print()
 
 def h_math(num):
-    if num == 1:
+    global e_health
+    if num > 1 and num <= 499:
         e_health = e_health - num
-    elif num == 2: 
+        if e_health < 0:
+            e_health = 0
+        else:
+            e_health = e_health
+
+    elif num >= 500 and num <= 899:
         e_health = e_health - num
-    elif num == 3:
+        if e_health < 0:
+            e_health = 0
+        else:
+            e_health = e_health
+
+    elif num >= 900 and num <= 1999:
         e_health = e_health - num
-    elif num == 4:
-        e_health = e_health - num
+        if e_health < 0:
+            e_health = 0
+        else:
+            e_health = e_health
+
+    elif num >= 2000 and num <= 3999:
+        e_health= e_health - num
+        if e_health < 0:
+            e_health = 0
+        else:
+            e_health = e_health
+
 
 def e_math(num):
+    global health
     if num <= 499:
-        e = health = e_health - num
+        health = health - num
+        if health < 0:
+            health = 0
+            return health
+        else:
+            health = health
+            return health
+
     elif num >= 500 and num <= 899:
-        e = health = e_health - num
+        health = health - num
+        if health < 0:
+            health = 0
+            return health
+
+        else:
+            health = health
+            return health
+
     elif num >= 900 and num <= 1999:
-        e = health = e_health - num
+        health = health - num
+        if health < 0:
+            health = 0
+            return health
+
+        else:
+            health = health
+
     elif num >= 2000 and num <= 3999:
-        e = health = e_health - num
+        health = health - num
+        if health < 0:
+            health = 0
+            return health
+
+        else:
+            health = health
+            return health
 
 
-def random_move(move):
+
+def random_move():
     global total_damage
     total_damage = []
     move = e_powers 
 
-    enemy_move = random.choice(move)
-    if  enemy_move == move["Attack1"]: 
+    enemy_move = random.randint(1,4)
+    if  enemy_move == 1: 
         print("The enemy used", move["Attack1"])
-        damage = random_number(1)
-        total_damage = [e_math(damage)]
+        damage = e_random_number(1)
+        total_damage.append(damage)
 
-    elif  enemy_move == move["Attack2"]: 
+    elif  enemy_move == 2: 
         print("The enemy used", move["Attack2"])
-        damage = random_number(2)
-        total_damage = [e_math(damage)]
+        damage = e_random_number(2)
+        total_damage.append(damage)
 
-    elif  enemy_move == move["Attack3"]: 
+    elif  enemy_move == 3: 
         print("The enemy used", move["Attack3"])
-        damage = random_number(3)
-        total_damage = [e_math(damage)]
+        damage = e_random_number(3)
+        total_damage.append(damage)
 
-    elif  enemy_move == move["Special"]: 
+    elif  enemy_move == 4: 
         print("The enemy used", move["Special"])
-        damage = random_number(4)
-        total_damage = [e_math(damage)]
+        damage = e_random_number(4)
+        total_damage.append(damage)
         
        
 
 def random_number(num):
     if num == 1:
         damage = random.randint(250, 499)
-        return h_math(damage)
+        return damage
 
     elif num == 2:
         damage = random.randint(500, 899)
         return h_math(damage)
+
+    elif num == 3:
+        damage = random.randint(900, 1999)
+        return h_math(damage)
+        
+
+    elif num == 4:
+        damage = random.randint(2000, 3999)
+        return h_math(damage)
+
+
+def e_random_number(num):
+    if num == 1:
+        damage = random.randint(250, 499)
+        return e_math(damage)
+
+    elif num == 2:
+        damage = random.randint(500, 899)
+        return e_math(damage)
 
     elif num == 3:
         damage = random.randint(900, 1999)
@@ -216,8 +302,40 @@ def random_number(num):
         return e_math(damage)
 
 
+def h_defeated(health):
+    game_over = False
+    while game_over != False:
+        if health == 0:
+            print("Game Over you have died!")
+            print("Your not so great after all! ")
+            game_over = True
+            return False
+            break
+        elif e_health == 0:  
+            quest()
+            if choice_1 == 4:
+                print("Farewell Hero")
+                break
+            else:
+                print("You have defeated your target(s). ")
+                quest()
+        else:
+            game_over = False
+        
+
+def e_defeated(e_health):
+    if e_health <= 0:  
+        print("You have defeated your target(s). ")
+        quest()
+    elif e_health > 0:
+        print(foe, "is preparing to attack")
+
+def enemy_attack():
+    random_move()
+    print(foe, "has reduced your health to", health)
+    h_defeated(health)
+
 def story_line():
-    print("Your quest begans.")
     cont = True
     while cont == True:
         print()
@@ -225,8 +343,10 @@ def story_line():
         print()
         choice = int(input("What would you like to do? "))
         attack(choice)
-    
-    print("Your target strike bac causing Damage.")
+        enemy_attack()
+
+        
+    print("Your target strike back causing Damage.")
 
 
 
