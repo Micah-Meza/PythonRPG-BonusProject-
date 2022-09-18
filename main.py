@@ -1,6 +1,6 @@
 # You are Hercules, the greatest of the Greek Heroes! You have been tasked by 
-# King Eurystheus to slay the vicious Nemean Lion, defeat the impossible 
-# nine-headed Lernaean Hydra, and capture the guard dog of the underworld—Cerberus.
+#       King Eurystheus to slay the vicious Nemean Lion, defeat the impossible 
+#       nine-headed Lernaean Hydra, and capture the guard dog of the underworld—Cerberus.
 
 # Features:
 
@@ -27,15 +27,23 @@
 ##########################################################################################################################
 import random
 
+
+
+def run_game():
+    story_line()
+    attack()
+
 def story_line():
-    print("")
+    print("Thank you for coming Hercules. You are the greatest of the Greek Heroes!")
+    print("You have been tasked by King Eurystheus to undergo a few impossible quests outside the kingdom. ")
+    print("Here's what is asked of you might hero:\n 1. Slay the vicious Nemean Lion, 2. Defeat the impossible nine-headed Lernaean Hydra and 3. Capture Cerberus the guard dog of Hades.")
 
 def status(health, attack, powers):
     health = health
     attack = attack
     powers = powers
 
-def hero_menu():
+def attack():
     choice = input(int("What would you like to do?\n 1. Hard Punch\n 2. Kick\n 3. Super Combo\n 4. Heal  "))
     if choice == 1:
         print("Hard Punch!")
@@ -47,12 +55,34 @@ def hero_menu():
         print("Thanks I feel better!")
     else:
         ("Invalid choice. Please choose a number 1-4. ")
-    
 
+def quest(choice):
+    choice  = input("Which task would you like to do?\n 1. Slay the vicious Nemean Lion.\n 2. Defeat the impossible nine-headed Lernaean Hydra.\n 3. Capture Cerberus the guard dog of Hades.\n Enter a number.")
+    if choice == 1:
+        print("You choose, The Nemean Lion")
+        status(500, 100, "Iron Jaw" )
+    elif choice == 2:
+    print(" You choose, The Nine-Headed Lernaean Hydra. ")
+        status(1500, 500, "Hydra Bite" )
+    elif choice == 3:
+    print("You choose, Cerberus the guard dog of Hades.")
+        status(3000, 1000, "Bark Of Darkness" )
+    else:
+        print("Invalid choice. Try again. ")
+        print()
+
+def enemy(monster):
+    print("")
+
+def hero():
+    print()         
 
 def random_move(move):
     enemy_move = random.choice(move)
 
 
+
+
+run_game()
 
 
